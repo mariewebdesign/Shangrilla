@@ -1,0 +1,90 @@
+<!-- 1er menu -->
+<nav id="menu-haut" class="navbar navbar-expand-lg navbar-dark bg-primary p-1 pl-5">       
+    <div class="container">   
+        <div class="navbar-nav me-auto mb-2 mb-lg-0">
+            <a class="p-2" href="#"><i class="fas fa-phone"></i> 00-000-000 | </a>
+            <a class="p-2" href="#"><i class="fas fa-phone"></i> 99-999-9999 | </a>
+            <a class="p-2" href="#"><i class="fas fa-envelope"></i> email@email.fr</a>
+        </div>
+     
+        <ul  class="navbar-nav ml-auto">
+         {% if app.user %}
+                        <li class="dropdown">
+                            <a href="#" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
+                                <img src="{{ app.user.avatar }}" alt="Avatar de {{ app.user.fullName }}" class="avatar avatar-small">
+                                {{ app.user.fullName}}
+                            </a>
+                            <div id="menu-connect" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" href="{{path('homepage')}}#repas">Commander un repas</a>
+                                  <a class="dropdown-item" href="{{path('homepage')}}#reservation">Réserver une table</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('account_home') }}">Mon compte</a>
+                                <a class="dropdown-item" href="#">Mes commandes</a>
+                                 <a class="dropdown-item" href="{{path('account_bookings')}}">Mes réservations</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('account_logout') }}">Déconnexion</a>
+                                
+                            </div>
+                        </li>
+        {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href=" {{path('account_login')}}"><i class="fas fa-eject"></i> Se connecter</a>
+                    </li>
+                     <li class="nav-item active">
+                        <a class="nav-link" href="{{path('account_register')}}">S'inscrire</a>
+                    </li> 
+        {% endif %}                      
+            </ul>
+           
+    </div>
+</nav>
+<!-- Logo -->
+<div class="mt-2 mb-2">
+    <a href="{{ path('homepage')}}"><img src="/img/logo.png" alt="logo shangrila" style="margin-left:20em;"></a>
+
+</div>
+<!-- 2ème menu français -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-1">       
+        <div class="container-fluid">   
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('homepage')}}">Accueil</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">A propos</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{path('homepage')}}#reservation">Réservation</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{path('homepage')}}#repas">Menu</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Galerie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Boutique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li><a href="#"><i class="fas fa-search text-light bg-primary p-2 mt-2"></i> </a></li>
+                </ul>
+
+               
+            </div>
+    </div>
+</nav>
+
+
+
+
+
+

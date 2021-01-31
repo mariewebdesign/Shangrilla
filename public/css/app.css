@@ -1,0 +1,79 @@
+/* body */
+.container{margin-top:1.2em;}
+.col{margin:0;padding:0}
+a,#menu-haut a{color:#f1f1f1}
+a:hover,#menu-haut a:hover{color:#b6996a;text-decoration:none}
+h1{color:#b6996a;text-transform:none; }
+h2{color:#f1f1f1;text-transform:none;}
+h3,h4,h5,h6{text-transform:none;}
+
+/* menu du haut */
+.avatar{width:128px;height:128px;border-radius:50%}
+.avatar-medium{max-width:64px;max-height:64px;}
+.avatar-small{max-width:32px;max-height:32px;}
+.avatar-xs{max-width:26px;max-height:26px;}
+#menu-connect a{color:#000}
+#menu-connect a:hover{color:#b6996a;text-decoration:none}
+
+/* section homepage sous le menu principal */
+#background_section_homepage{background:url('/img/image-1.jpg') no-repeat center center;padding-bottom:10em;background-size:cover}
+.btn-shangrila{background-color:#b6996a;color:#f1f1f1;margin-bottom:5em;font-size:0.8em;}
+
+#menu-anglais{
+    position:absolute;
+    margin-top:-8em;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size:0.6em;
+    text-transform:capitalize;
+    background-color:rgba(255,255,255,0.8); 
+}
+
+/* section nos menus */
+.btn-commander{text-transform:none;font-size:0.8em;border:solid 1px #1c1c1c}
+.text-menu{font-size:0.6em;}
+.card-body{padding:0.5em}
+.card-img{padding-right:1em;padding-left:1em;}
+.active-color{background-color:#b6996a;}
+
+/* section notre equipe */
+.img-equipe{border-radius:100%}
+.description-chef{font-size:0.6em;}
+
+/* section réservation */
+.overlay{
+    position:absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index:1;
+    background-color:rgba(0,0,0,0.8);}
+#background_section_reservation{background:url('/img/fond2.jpg') no-repeat center center;text-align:center;padding-top:3em;padding-bottom:3em;background-size:cover;position:relative}
+#title-reservation{border-top:solid 1px #f1f1f1;border-bottom:solid 1px #f1f1f1;padding-top:0.5em;padding-bottom:0.5em;}
+
+/* section carousel avis */
+.carousel-auteur{background-color:#b6996a;}
+
+/* section our blog */
+.section-ourblog h5{font-size:0.6em;margin-top:1em;text-align:left;margin-left:2em}
+.section-ourblog p{margin-top:1em;text-align:left;margin-left:2em}
+
+.ourblog{font-size:0.6em;text-transform:none}
+.ourblog a{color:#000} 
+
+/* footer */
+footer{text-align:left;color:#c1c1c1}
+footer h6{color:#c1c1c1;text-align:left;margin-left:6em}
+footer ul {text-align:left;margin-left:6em;font-size:0.7em}
+footer .ulfooter{list-style-type:none;margin-left:4em}
+footer ul .litext{color:#b6996a}
+footer p{font-size:0.7em}
+
+.center{text-align:center}
+
+
+

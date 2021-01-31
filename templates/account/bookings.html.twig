@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de mes réservations{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="text-center">Mes réservations</h1>
+    <div class="bg-light p-5 my-5">
+
+        <h2 class="h4">Retrouvez ici toutes vos réservations</h2>
+    </div>
+
+           {% for booking in app.user.users %}
+                <div class="row border-bottom border-light mt-5">
+            
+                    <div class="col-8 mb-3">
+                       
+                        <p>Réservation n°<strong>{{booking.id}}</strong></p>
+                        <p>Le {{booking.date | date('d/m/y')}} à {{booking.time}} pour {{booking.customers}} participants.</p>
+                      
+                    </div>
+        
+                </div>
+            {% endfor %}
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,360 @@
+{% extends 'base.html.twig' %}
+
+    {% block body %}
+
+    <!-- titre H1 + h3 + img background + bouton plus de détails -->
+    <section id="background_section_homepage" class="container-fluid text-center pb-5 pt-5 text-light">
+        <h1 class="mt-5">Restaurant Shangrila</h1>
+        <h2>Commandez votre menu et réservez votre table</h2>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.sit amet consectetur, adipisicing elit.</p>
+        <button class="btn btn-shangrila pr-3 pl-3 pt-1 pb-1" type="submit" >+ Détails</button>
+    </section>
+
+    <!-- logo + 3ème menu en anglais -->
+
+    <nav  id="menu-anglais" class="navbar navbar-expand-lg navbar-light p-1">       
+        <div class="container-fluid"> 
+           
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent2">
+        
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li> <a class="navbar-brand" href="{{ path('homepage')}}"><img src="/img/logo.png" alt="logo shangrila" style="width:4em;"></a>  </li>
+                    <li class="nav-item active active-color">
+                        <a class="nav-link" href="{{ path('homepage')}}">Home</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{path('homepage')}}#reservation">Reservation</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{path('homepage')}}#repas">Menu</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+
+               
+        </div>
+    </nav>
+
+<!-- section commander menu (h2 + h4 + 4 card avec h3-texte-bouton commander) -->
+<section class="text-center mt-5" id="repas">
+
+    <h3 class="text-center">Nos Menus</h3>
+    <p class="text-center">Découvrez-les</p>
+
+    <div class="row">
+        <div class="col-md-4 offset-md-2 p-1">
+            <div class="row card-body ">
+        
+                <div class="col">
+                    <div class="card-img">
+                        <img src="/img/delicious_1.jpg" alt="petit dejeuner" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col text-left">
+                    <div class="card-title">
+                        <h5 >Petit déjeuner</h5>
+                    </div>
+                    <div class="card-text pb-2 text-menu">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
+                    </div>
+                    <a href="" class="btn-commander btn pt-1 pb-1 pl-3 pr-3" type="submit">Commander</a>
+                </div>
+            </div>
+            <div class="row card-body">
+        
+                <div class="col">
+                    <div class="card-img">
+                        <img src="/img/delicious_3.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col text-left">
+                    <div class="card-title">
+                        <h5>Diner</h5>
+                    </div>
+                    <div class="card-text pb-2 text-menu">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
+                    </div>
+                    <button class="btn-commander btn pt-1 pb-1 pl-3 pr-3" type="submit">Commander</button>
+                </div>
+            </div>
+        
+        </div>
+
+         <div class="col-md-4 p-1">
+            <div class="row card-body">
+        
+                <div class="col">
+                    <div class="card-img">
+                        <img src="/img/delicious_2.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col text-left">
+                    <div class="card-title">
+                        <h5>Déjeuner</h5>
+                    </div>
+                    <div class="card-text pb-2 text-menu">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
+                    </div>
+                    <button class="btn-commander btn pt-1 pb-1 pl-3 pr-3" type="submit">Commander</button>
+                </div>
+            </div>
+            <div class="row card-body">
+        
+                <div class="col">
+                    <div class="card-img">
+                        <img src="/img/delicious_4.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col text-left">
+                    <div class="card-title">
+                        <h5>Fast Food</h5>
+                    </div>
+                    <div class="card-text pb-2 text-menu">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
+                    </div>
+                    <button class="btn-commander btn pt-1 pb-1 pl-3 pr-3" type="submit">Commander</button>
+                </div>
+            </div>
+        
+        </div>
+      </div>
+        
+    </section>
+<!-- section nos plats (2 rangées de 4 colonnes img) -->
+
+<section class="text-center mt-5 ">
+
+    <h3 class="text-center">Nos Plats</h3>
+    <p class="text-center">Toutes les saveurs que vous cherchez</p>
+    <div class=" row mt-4 ">
+        <div class="col">
+            <img src="/img/1.jpg" alt="plat1" class="img-fluid">
+            <img src="/img/5.jpg" alt="plat5" class="img-fluid">
+        </div>
+        <div class="col">
+            <img src="/img/2.jpg" alt="plat2" class="img-fluid">
+            <img src="/img/6.jpg" alt="plat6" class="img-fluid">
+        </div>
+        <div class="col">
+            <img src="/img/3.jpg" alt="plat3" class="img-fluid">
+            <img src="/img/7.jpg" alt="plat7" class="img-fluid">
+        </div>
+        <div class="col">
+            <img src="/img/4.jpg" alt="plat4" class="img-fluid">
+            <img src="/img/8.jpg" alt="plat8" class="img-fluid">
+        </div>
+    </div>
+
+</section>
+
+<!-- section equipe (h2 + h4 + 3 vignettes img rondes + h4 + h6) -->
+
+<section class="text-center mt-5 mb-5">
+
+    <h3 class="text-center">Notre équipe</h3>
+    <p class="text-center">Notre compétence à votre service</p>
+
+     <div class="row mt-4">
+        <div class="col-md-2 offset-md-3">
+            <img src="/img/chef-2.jpg" alt="chef2" class="img-fluid img-equipe">
+            <h6 class="mt-3">Chef 2</h6>
+            <p class="description-chef">description du chef</p>
+           
+        </div>
+        <div class="col-md-2">
+            <img src="/img/chef-3.jpg" alt="chef3" class="img-fluid img-equipe">
+            <h6 class="mt-3">Chef 3</h6>
+            <p class="description-chef">description du chef</p>
+         
+        </div>
+        <div class="col-md-2">
+            <img src="/img/chef-1.jpg" alt="chef1" class="img-fluid img-equipe">
+            <h6 class="mt-3">Chef 1</h6>
+            <p class="description-chef">description du chef</p>
+           
+        </div>
+       
+    </div>
+
+</section>
+
+<!-- section réservation table (h2 + img background)-->
+
+  <section class="overlay" id="background_section_reservation" class=" text-center text-light">
+
+        <h2 class="mt-5 mb-5"  id="title-reservation">INTERPELLATA PAUCIS</h2>
+
+        
+    </section>
+
+<!-- section suite réservation table (h4 + h6 + date/heure/nombre pers + bouton réserver)-->
+
+<section class="text-center mt-5 mb-5" id="reservation">
+
+    <h3  class="text-center">Réservation</h3>
+    <p class="text-center">Réservez votre table pour diner</p>
+    
+    {{ form_start(form) }}
+
+    <div class="row" >
+                <div class="col-md-2 offset-md-3">
+                  
+                   <i class="far fa-calendar-alt"></i> {{form_row(form.date)}}
+            
+                </div>
+                <div class="col-md-2">
+                  <i class="far fa-clock"></i>{{form_row(form.time) }}
+                     
+  
+                </div>
+                <div class="col-md-2">
+                   <i class="fas fa-users"></i> {{form_row(form.customers)}}
+                </div>
+            </div>
+
+    <button type="submit" class="btn btn-primary">Réserver</button>
+   
+
+    {{ form_end(form) }}
+
+   
+</section>
+
+
+
+<!-- section avis (vignette auteur carousel + nom auteur + avis)-->
+<section class="text-center mt-5 mb-5 carousel-auteur">
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+       
+        <div class="carousel-inner text-white ">
+            <div class="carousel-item active mb-5">
+                <img src="/img/chef-thumb.jpg" alt="img-auteur" class="img-equipe mt-5 mb-5 ">
+                <div class="row ">
+                    <div class="col-md-4 offset-md-2">Auteur avis 1</div>
+                    <div class="col-md-4 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste eaque ex saepe harum, rem non tenetur, veritatis nulla voluptas delectus natus possimus, error adipisci qui facere minima cum recusandae nobis?</div>
+    
+                </div>
+            </div>
+            <div class="carousel-item mb-5">
+                <img src="/img/chef-1.jpg" alt="img-auteur" class="img-equipe mt-5 mb-5 ">
+                <div class="row">
+                    <div class="col-md-4 offset-md-2">Auteur avis 2</div>
+                    <div class="col-md-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste eaque ex saepe harum, rem non tenetur, veritatis nulla voluptas delectus natus possimus, error adipisci qui facere minima cum recusandae nobis?</div>
+    
+                </div>
+            </div>
+            <div class="carousel-item mb-5 ">
+                <img src="/img/chef-2.jpg" alt="img-auteur" class="img-equipe mt-5 mb-5 ">
+                <div class="row">
+                    <div class="col-md-4 offset-md-2">Auteur avis 3</div>
+                    <div class="col-md-4 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste eaque ex saepe harum, rem non tenetur, veritatis nulla voluptas delectus natus possimus, error adipisci qui facere minima cum recusandae nobis?</div>
+    
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    
+
+</section>
+
+
+<!-- section our blog (h4 + texte + 3 card img + titre + date + texte + bouton "+ détails" + nbre likes -->
+
+<section class="text-center mt-5 section-ourblog">
+
+    <h3 class="text-center">Our Blog</h3>
+    <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste ex magni deserunt molestias, ad vero impedit at natus suscipit molestiae hic? Vero ad voluptas, vitae eaque dolor doloribus aliquid vel?</p>
+
+    <div class="row" >
+       <div class="col-lg-2 offset-lg-3">
+            <div class="card-body">
+                    <div class="card-img">
+                        <img src="/img/news-1.jpg" alt="news 1" class="img-fluid">
+                    </div>
+                <div class="blog">
+                    <div class="card-title">
+                        <h5>Lorem ipsum dolor</h5>
+                    </div>
+                    <div class="card-text pb-2 text-menu">
+                         <p>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
+                        </p> 
+                    </div>
+                     <div class="row ourblog">
+                        <div class="col"><a href="#">+ détails</a></div>
+                        <div class="col">10 likes</div>
+                    </div>
+                </div>
+            </div>
+       </div>
+       <div class="col-lg-2">
+            <div class="card-body">
+                    <div class="card-img">
+                        <img src="/img/news-2.jpg" alt="news 2" class="img-fluid">
+                    </div>
+                    <div class="card-title">
+                        <h5> sit amet</h5>
+                    </div>
+                    <div class="card-text pb-2 text-menu">
+                        <p>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
+                        </p> 
+                    </div>
+                     <div class="row ourblog">
+                        <div class="col"><a href="#">+ détails</a></div>
+                        <div class="col">10 likes</div>
+                    </div>
+            </div>
+       </div>
+       <div class="col-lg-2">
+            <div class="card-body">
+                    <div class="card-img">
+                        <img src="/img/news-3.jpg" alt="news 3" class="img-fluid">
+                    </div>
+                    <div class="card-title">
+                        <h5>consectetur adipisicing</h5>
+                    </div>
+                    <div class="card-text pb-2 text-menu ">
+                         <p>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
+                        </p> 
+                    </div>
+                    <div class="row ourblog">
+                        <div class="col"><a href="#">+ détails</a></div>
+                        <div class="col">10 likes</div>
+                    </div>
+                    
+            </div>
+       </div>
+
+    </section>
+
+
+    {% endblock %}

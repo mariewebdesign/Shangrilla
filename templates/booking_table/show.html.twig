@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation N° {{booking.id}} {% endblock %}
+
+{% block body %}
+
+    <main class="container">
+    
+        <h1>Réservation n° {{booking.id}}</h1>
+    
+        {% if app.request.query.get('alert') %}
+            <div class="alert alert-success">
+                <h4 class="alert alert-heading">Bravo {{ booking.users.lastname | capitalize}} {{ booking.users.firstname | capitalize}}</h4>
+                <p>Votre réservation dans notre restaurant a bien été enregistrée ! </p>
+             </div>
+
+        {% endif %}
+
+        <div class="row">
+        
+            <div class="col">
+                <div class="alert alert-light">
+                    <h3>Détails</h3>
+                    <dl class="row">
+                        <dt class="col-md-4">Numéro :</dt>
+                        <dd class="col-md-8">{{booking.id}}</dd>
+                        <dt class="col-md-4">Date de réservation :</dt>
+                        <dd class="col-md-8">{{booking.date | date('d/m/Y')}}</dd>
+                        <dt class="col-md-4">Heure de réservation</dt>
+                        <dd class="col-md-8">{{booking.time }}</dd>
+                        <dt class="col-md-4">Nombre de participants :</dt>
+                        <dd class="col-md-8">{{booking.customers}}</dd>
+                        
+                    </dl>
+                </div>
+            </div>
+            
+
+        </div>
+
+    </main>
+
+
+{% endblock %}
