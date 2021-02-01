@@ -15,12 +15,13 @@
                                 {{ app.user.fullName}}
                             </a>
                             <div id="menu-connect" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="{{path('homepage')}}#repas">Commander un repas</a>
+                                  <a class="dropdown-item" href="{{path('meals_list')}}">Commander un repas</a>
                                   <a class="dropdown-item" href="{{path('homepage')}}#reservation">Réserver une table</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ path('account_home') }}">Mon compte</a>
                                 <a class="dropdown-item" href="#">Mes commandes</a>
                                  <a class="dropdown-item" href="{{path('account_bookings')}}">Mes réservations</a>
+                                 <a class="dropdown-item" href="{{path('account_orders')}}">Mes commandes</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ path('account_logout') }}">Déconnexion</a>
                                 

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affichage d'un menu{% endblock %}
+
+{% block body %}
+
+
+<div class="container mt-5">
+            <img src="{{meal.coverImage}}" alt="photo du menu {{meal.title}}">
+            <h1>{{meal.title}}</h1>
+            <p>{{meal.introduction}}</p>
+            {{meal.price}} &euro;</strong></p> 
+             <a href="{{path('order_create',{'slug':meal.slug})}}" class="btn btn-warning">Commander</a>
+              
+             
+            <h3 class="mt-5">Composition du menu</h3>
+            <div class="mb-5">{{meal.description|raw}}</div>
+            <a href="{{path('homepage')}}" class="btn btn-primary btn-sm">Retour à l'accueil</a>
+
+</div>
+{% endblock %}

@@ -58,85 +58,17 @@
     <h3 class="text-center">Nos Menus</h3>
     <p class="text-center">Découvrez-les</p>
 
-    <div class="row">
-        <div class="col-md-4 offset-md-2 p-1">
-            <div class="row card-body ">
         
-                <div class="col">
-                    <div class="card-img">
-                        <img src="/img/delicious_1.jpg" alt="petit dejeuner" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col text-left">
-                    <div class="card-title">
-                        <h5 >Petit déjeuner</h5>
-                    </div>
-                    <div class="card-text pb-2 text-menu">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
-                    </div>
-                    <a href="" class="btn-commander btn pt-1 pb-1 pl-3 pr-3" type="submit">Commander</a>
-                </div>
-            </div>
-            <div class="row card-body">
-        
-                <div class="col">
-                    <div class="card-img">
-                        <img src="/img/delicious_3.jpg" alt="" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col text-left">
-                    <div class="card-title">
-                        <h5>Diner</h5>
-                    </div>
-                    <div class="card-text pb-2 text-menu">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
-                    </div>
-                    <button class="btn-commander btn pt-1 pb-1 pl-3 pr-3" type="submit">Commander</button>
-                </div>
-            </div>
-        
+    <div class="container-fluid">
+        <div class="row col-md-10">
+         {% for meal in meals|slice(0, 4) %}
+            {% include 'meal/_meal.html.twig' %}
+        {% endfor %}
         </div>
 
-         <div class="col-md-4 p-1">
-            <div class="row card-body">
+    </div>
         
-                <div class="col">
-                    <div class="card-img">
-                        <img src="/img/delicious_2.jpg" alt="" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col text-left">
-                    <div class="card-title">
-                        <h5>Déjeuner</h5>
-                    </div>
-                    <div class="card-text pb-2 text-menu">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
-                    </div>
-                    <button class="btn-commander btn pt-1 pb-1 pl-3 pr-3" type="submit">Commander</button>
-                </div>
-            </div>
-            <div class="row card-body">
-        
-                <div class="col">
-                    <div class="card-img">
-                        <img src="/img/delicious_4.jpg" alt="" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col text-left">
-                    <div class="card-title">
-                        <h5>Fast Food</h5>
-                    </div>
-                    <div class="card-text pb-2 text-menu">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni provident quidem totam recusandae
-                    </div>
-                    <button class="btn-commander btn pt-1 pb-1 pl-3 pr-3" type="submit">Commander</button>
-                </div>
-            </div>
-        
-        </div>
-      </div>
-        
-    </section>
+</section>
 <!-- section nos plats (2 rangées de 4 colonnes img) -->
 
 <section class="text-center mt-5 ">
@@ -289,7 +221,7 @@
 
 <section class="text-center mt-5 section-ourblog">
 
-    <h3 class="text-center">Our Blog</h3>
+    <h3 class="text-center">Votre avis</h3>
     <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste ex magni deserunt molestias, ad vero impedit at natus suscipit molestiae hic? Vero ad voluptas, vitae eaque dolor doloribus aliquid vel?</p>
 
     <div class="row" >

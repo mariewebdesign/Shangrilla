@@ -2,11 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\MealRepository;
+use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MealRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MealRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Meal
 {
@@ -38,7 +43,7 @@ class Meal
     private $introduction;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -48,9 +53,35 @@ class Meal
     private $coverImage;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="meal")
      */
-    private $images;
+    private $comments;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity=Meal::class, mappedBy="author", orphanRemoval=true)
+     */
+    private $meals;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->meals = new ArrayCollection();
+    }
+
+    /**
+     * Création d'une fonction pour permettre d'initialiser le slug (avant la persistance et avant la maj)
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function initializeSlug(){
+
+        if(empty($this->slug)){
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->title);
+        }
+    }
+
 
     public function getId(): ?int
     {
@@ -129,15 +160,66 @@ class Meal
         return $this;
     }
 
-    public function getImages(): ?string
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
     {
-        return $this->images;
+        return $this->comments;
     }
 
-    public function setImages(string $images): self
+    public function addComment(Comment $comment): self
     {
-        $this->images = $images;
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setMeal($this);
+        }
 
         return $this;
     }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getMeal() === $this) {
+                $comment->setMeal(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getMeals(): Collection
+    {
+        return $this->meals;
+    }
+
+    public function addMeal(self $meal): self
+    {
+        if (!$this->meals->contains($meal)) {
+            $this->meals[] = $meal;
+            $meal->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeal(self $meal): self
+    {
+        if ($this->meals->removeElement($meal)) {
+            // set the owning side to null (unless already changed)
+            if ($meal->getAuthor() === $this) {
+                $meal->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 }

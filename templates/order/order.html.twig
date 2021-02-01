@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande Menus{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row text-center mt-5">
+        <h1>Commandez votre menu et faites vous livrer à domicile</h1>
+
+        <div class="col-md-6">
+            <h3 class="mt-5 mb-4 ">Vous avez choisi le menu {{meal.title | upper}} à {{meal.price}} &euro;</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{meal.coverImage}}" alt="photo du menu {{meal.title}}" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <p>{{meal.introduction}}</p>
+                    <p>{{meal.description}}</p>
+
+                </div>
+        
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row mb-5 mt-5">
+            <div class="text-left col-md-8 offset-md-4">
+                <h5 class="ml-4" >Adresse de livraison : </h5>
+                <ul style="list-style-type:none">
+                    <li>{{app.user.fullName}}</li>
+                    <li>{{app.user.address}} </li>
+                    <li>{{app.user.cp}}</li>
+                    <li>{{app.user.city}}</li>
+                
+                </ul>
+                <h6 class="ml-4">Téléphone à contacter :</h6>
+                <ul style="list-style-type:none">
+                    <li>{{app.user.tel}}</li>
+                </ul> 
+            <a href="{{ path('account_profile') }}" class=" ml-4 btn btn-primary">Modifier mes coordonnées</a>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+     {{ form_start(form) }}
+            <div class="col-md-4 offset-md-3">
+               
+                <div class="row">
+                    <div class="mt-5 " >
+                      <h3 >Choisissez le nombre de repas souhaité</h3>
+                        <div>  
+                             {{form_row(form.qty)}}  
+                        </div>
+                        <h3 >Choisissez la date et l'heure de livraison</h3>
+                        <div>  
+                             {{form_row(form.date)}}  
+                        </div>
+                        <div >
+                           {{form_row(form.time) }}
+                        </div>
+                              
+                          
+                    </div>
+                    <button type="submit" class="mb-5 btn btn-success " >Valider la livraison</button>  
+                 {{ form_end(form) }}
+                        
+                </div>
+            
+            </div>
+           
+     
+
+    </div>    
+
+</div>
+</div>
+
+{% endblock %}
+

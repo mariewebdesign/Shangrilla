@@ -15,6 +15,10 @@ class AccountType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('email')
+            ->add('address')
+            ->add('cp')
+            ->add('city')
+            ->add('tel')
             ->add('avatar')
             ->add('description')
          

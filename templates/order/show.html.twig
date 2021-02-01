@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande N° {{order.id}} {% endblock %}
+
+{% block body %}
+
+    <main class="container">
+    
+        <h1>Réservation n° {{order.id}}</h1>
+    
+        {% if app.request.query.get('alert') %}
+            <div class="alert alert-success">
+                <h4 class="alert alert-heading">Bravo {{ order.customer.lastname | capitalize}} {{ order.customer.firstname | capitalize}}</h4>
+                <p>Votre commande a bien été enregistrée ! </p>
+             </div>
+
+        {% endif %}
+
+        <div class="row">
+        
+            <div class="col">
+                <div class="alert alert-light">
+                    <h3>Détails</h3>
+                    <dl class="row">
+                        <dt class="col-md-4">Numéro :</dt>
+                        <dd class="col-md-8">{{order.id}}</dd>
+                        <dt class="col-md-4">Date de livraison :</dt>
+                        <dd class="col-md-8">{{order.date | date('d/m/Y')}}</dd>
+                        <dt class="col-md-4">Heure de livraison</dt>
+                        <dd class="col-md-8">{{order.time }}</dd>
+                        <dt class="col-md-4">Prix total :</dt>
+                        <dd class="col-md-8">{{order.amount}}</dd>
+                        
+                    </dl>
+                </div>
+            </div>
+            
+
+        </div>
+
+    </main>
+
+
+{% endblock %}

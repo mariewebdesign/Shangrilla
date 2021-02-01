@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Order;
 use Cocur\Slugify\Slugify;
 use App\Entity\BookingTable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -91,6 +92,36 @@ class User implements UserInterface  // implémentation de UserInterface permett
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="customer")
+     */
+    private $customer;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $cp;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $tel;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author",orphanRemoval=true)
+     */
+    private $comments;
+
     public function getFullName(){
         return "{$this->firstname} {$this->lastname}";
     }
@@ -101,6 +132,7 @@ class User implements UserInterface  // implémentation de UserInterface permett
         $this->userRoles = new ArrayCollection();
         $this->roles = new ArrayCollection();
         $this->date = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     
     }
 
@@ -315,5 +347,92 @@ class User implements UserInterface  // implémentation de UserInterface permett
     public function getUsers()
     {
         return $this->users;
+    }
+
+       /**
+     * @return Order
+     *
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getCp(): ?string
+    {
+        return $this->cp;
+    }
+
+    public function setCp(string $cp): self
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(string $tel): self
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getAuthor() === $this) {
+                $comment->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }

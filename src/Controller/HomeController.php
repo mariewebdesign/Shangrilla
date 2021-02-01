@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Meal;
+use App\Service\Pagination;
 use App\Entity\BookingTable;
 use App\Form\BookingTableType;
+use App\Repository\MealRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    
+
+  
      /**
      * Permet d'afficher le formulaire de réservation de table
      * @Route("/", name="homepage")
@@ -22,9 +26,12 @@ class HomeController extends AbstractController
      * 
      * @return Response
      */
-    public function reservation(Request $request,ObjectManager $manager)
+    public function reservation(Request $request,ObjectManager $manager,MealRepository $mealRepo)
 
     {
+
+     
+
         $booking = new BookingTable();
 
         $form = $this->createForm(BookingTableType::class,$booking);
@@ -51,10 +58,14 @@ class HomeController extends AbstractController
 
         return $this->render('home.html.twig', [
            
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'meals'=>$mealRepo->findAll()
             
         ]);
+
+        
     }
+
 
   
 }

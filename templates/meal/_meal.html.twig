@@ -1,0 +1,29 @@
+    {% set url=path('meal_single',{'slug':meal.slug}) %}
+
+    <div class="col-md-4 offset-md-2 p-1">
+            <div class="row card-body ">
+
+                <div class="col">
+                    <div class="card-img">
+                        <img src="{{meal.coverImage}}" alt="photo de {{meal.title}}" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col text-left">
+                    <div class="card-title">
+                        <h5 >Menu {{meal.title}} </h5>
+                    </div>
+                    <div class="card-text pb-2 text-menu">
+                        {{meal.introduction}}
+                    </div>
+                    <div class="card-text pb-2 text-menu">
+                        {{meal.description}}
+                    </div>
+                    <div class="mb-2">Montant du menu : {{meal.price}} &euro;</div>
+                    <a href="{{ url }}" class="btn btn-warning btn-sm">+ d'infos</a>
+                    <a href="{{path('order_create',{'slug':meal.slug})}}" class="btn btn-primary btn-sm">Commander</a>
+                           
+                </div>
+            </div>              
+    </div>
+
+           

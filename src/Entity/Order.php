@@ -2,14 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\Response;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
  * @ORM\Table(name="`order`")
+ * @ORM\HasLifecycleCallbacks
  */
 class Order
 {
@@ -36,7 +40,7 @@ class Order
     private $date;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="datetime")
      */
     private $time;
 
@@ -50,9 +54,36 @@ class Order
      */
     private $amount;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $payment;
+
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $qty;
+
+    /**
+     * Callback appelé à chaque fois qu'on crée une commande
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     *
+     * @return Response
+     */
+    public function prePersist(){
+        if(empty($this->createdat)){
+            $this->createdat = new \DateTime();
+        }
+
+       
+    }
+
     public function __construct()
     {
         $this->meal = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,6 +120,7 @@ class Order
         return $this;
     }
 
+   
     public function removeMeal(Meal $meal): self
     {
         $this->meal->removeElement($meal);
@@ -140,6 +172,31 @@ class Order
     public function setAmount(float $amount): self
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getPayment(): ?bool
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(bool $payment): self
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+
+    public function getQty(): ?int
+    {
+        return $this->qty;
+    }
+
+    public function setQty(int $qty): self
+    {
+        $this->qty = $qty;
 
         return $this;
     }
