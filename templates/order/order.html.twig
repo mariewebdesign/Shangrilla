@@ -50,8 +50,11 @@
                 <div class="row">
                     <div class="mt-5 " >
                       <h3 >Choisissez le nombre de repas souhaité</h3>
-                        <div>  
-                             {{form_row(form.qty)}}  
+                        <div >  
+                        {{form_row(form.qty)}}
+                        <h6 class="mb-4">
+                            soit un total de <span id="amount" name="amount" >...</span> &euro;
+                        </h6>
                         </div>
                         <h3 >Choisissez la date et l'heure de livraison</h3>
                         <div>  
@@ -63,7 +66,7 @@
                               
                           
                     </div>
-                    <button type="submit" class="mb-5 btn btn-success " >Valider la livraison</button>  
+                    <button type="submit" class="mb-5 btn btn-primary" >Valider la livraison</button>  
                  {{ form_end(form) }}
                         
                 </div>
@@ -77,5 +80,23 @@
 </div>
 </div>
 
+{% endblock %}
+
+{% block javascripts %}
+<script>
+
+$("input[name= 'order[qty]']").on('keyup input',function(){
+
+    var orderqty =  parseInt($('#order_qty').val());
+    var amountqty = orderqty * {{meal.price}};
+
+    // insertion des nombres $('#amount) et $('#qty')
+    $('#qty').text(orderqty);
+    $('#amount').text(amountqty);
+
+})
+
+    
+</script>
 {% endblock %}
 

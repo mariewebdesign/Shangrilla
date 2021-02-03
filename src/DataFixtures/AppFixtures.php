@@ -92,7 +92,12 @@ class AppFixtures extends Fixture
                 $meal = new Meal();
                 
                 $title = $faker->sentence($nbWords = 2, $variableNbWords = true);
-                $coverImage='https://picsum.photos/600/400?random=1';
+                
+                $coverImage='/img/';
+                $imagerId=$faker->numberBetween(1,8).'.jpg';
+                $coverImage.= $imagerId;
+
+             
                 $introduction = $faker->paragraph(2);
                 $description = "<p>".join("</p><p>",$faker->paragraphs(1)). "</p>";
                 $user = $users[mt_rand(0,count($users)-1)];

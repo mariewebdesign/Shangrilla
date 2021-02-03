@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class OrderType extends ApplicationType
 {
@@ -34,7 +35,9 @@ class OrderType extends ApplicationType
             'attr' => ['class'=>'center']])
             ->add('qty',IntegerType::class,
                 ['label' => ' ',
-                'attr' => ['class'=>'center']])
+                'attr' => ['class'=>'center'],
+                'attr'=>['min'=>1,
+                          'max'=>12]])
 
         ;
     }

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+
 use App\Entity\User;
+use App\Entity\Order;
 use App\Form\AccountType;
 use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
@@ -199,6 +201,7 @@ class AccountController extends AbstractController
      */
     public function orders(){
         return $this->render('account/orders.html.twig');
+                
     }
 
     

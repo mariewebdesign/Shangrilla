@@ -5,19 +5,27 @@
 {% block body %}
 
 <div class="container">
-   <div class="col-md-6 offset-md-3 mb-5">
-                <h3 >Rentrer vos informations bancaires</h3>
+   <div id="payment" class="col-md-4 offset-md-3 mb-5 mt-5">
+               
                 <div >
                     <form action="{{path('order_payment',{'id':order.id})}}" method="post" id="payment-form">
                             <input type="hidden" value="{{order.amount}}" name="total">
-                                
+                                <div class="text-center">
+                                    <img  src="/img/cards.png" alt="cards">
+                                </div>
+                                <p class="text-center">Paiement avec stripes</p>
                             <label for="card-element">
-                            <img src="/img/cards.png" alt="cards">
-                                Paiement avec stripes
+                                
+                                <h4 class="mt-5">Montant total : {{order.amount}} &euro;</h4>
+                             
                             </label>
-                            <div class="mt-5 mb-5" id="card-element"></div>
+                            <h5 >Veuillez saisir vos informations bancaires</h5>
+                            <div class="mt-5 mb-5" id="card-element">
+                                </div>
                             <div id="card-errors" role="alert"></div>
-                          <button class="btn btn-success " >Confimer le paiement</button>  
+                            <div class="text-center">
+                                <button class="btn btn-primary " >Confimer le paiement</button>  
+                            </div>
 
                     </form>
                   
@@ -41,6 +49,7 @@
         var stripe = Stripe('pk_test_51GuiHFFbJaAsUUQt0g3NrBDEDopXB77Pu4nQTIiC1DkGVsxftu03EPTpPA4HippJ7hK7ZNsRwggzVycNrwpTLmIL00zpuWgb49')
         var elements = stripe.elements()
         var card = elements.create('card')
+
         card.mount('#card-element')
 
         card.addEventListener('change',function(e){

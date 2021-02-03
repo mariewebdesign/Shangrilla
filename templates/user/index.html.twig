@@ -13,14 +13,25 @@
                 <br>
                
             </div>
-            <div class="col-9">
+            <div class="row col-9">
                 <h1>{{ user.fullName }}</h1>  
 
                 {% if user is same as (app.user) %}  
-                    <div class="mt-3">
-                        <a href="{{ path('account_profile')}}" class="btn btn-secondary">Modifier mes informations</a>
-                        <a href="{{ path('account_password')}}" class="btn btn-secondary">Modifier mon mot de passe</a>
+                    <div class="col-md-6 ">
+                        <div class="p-2">
+                            <a href="{{ path('account_profile')}}" class="btn btn-primary btn-sm">Modifier mes informations</a>
+                        </div>
+                        <div class="p-2">
+                            <a href="{{ path('account_password')}}" class="btn btn-primary btn-sm">Modifier mon mot de passe</a>
+                        </div>
+                        <div class="p-2">
+                            <a href="{{ path('account_orders')}}" class="btn btn-primary btn-sm">Voir mes commandes et livraisons</a>
+                        </div>
+                        <div class="p-2">
+                            <a href="{{ path('account_bookings')}}" class="btn btn-primary btn-sm">Voir mes réservations de table</a>
+                        </div>
                     </div>
+            
                 {% endif %}
             
             </div>

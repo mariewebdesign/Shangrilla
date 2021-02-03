@@ -5,10 +5,10 @@
 {% block body %}
 
 <div class="container">
-    <h1 class="text-center">Mes commandes de menu</h1>
+    <h1 class="text-center">Mes commandes</h1>
     <div class="bg-light p-5 my-5">
 
-        <h2 class="h4">Retrouvez ici toutes vos commandes</h2>
+        <h2 class="h4">Retrouvez ici toutes vos commandes et livraisons</h2>
     </div>
 
            {% for order in app.user.customer %}
@@ -16,11 +16,11 @@
             
                     <div class="col-8 mb-3">
                        
-                        <p>Commande du {{order.createdat | date('d/m/y')}} : n° <strong>{{order.id}} </strong></p>
-                        <p>Montant : {{order.amount}} &euro;</p>
-                     
-                        <p>Livraison prévue le {{order.date | date('d/m/y')}} à {{order.time}} </p>
-                    
+                        <p>Commande du <span class="h5">{{order.createdat | date('d/m/y')}}</span> : n° <span class="h5">{{order.id}} </span></p>
+                        <p>Montant : <span class="h5">{{order.amount}} &euro;</span></p>
+                        <p>Menu Choisi : <span class="h5">{{order.meal.title}}</span></p>
+                        <p>Livraison prévue le <span class="h5">{{order.date | date('d/m/y')}} à {{order.time}} </span></p>
+                        <a href="{{ path('account_home') }}" class="mb-5 mt-5 btn btn-primary">Retour</a>
                     </div>
         
                 </div>

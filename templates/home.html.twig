@@ -59,13 +59,13 @@
     <p class="text-center">Découvrez-les</p>
 
         
-    <div class="container-fluid">
-        <div class="row col-md-10">
-         {% for meal in meals|slice(0, 4) %}
+    <div class="container">
+        <div class="row ">
+         {% for meal in meals |slice(0, 4) %}
             {% include 'meal/_meal.html.twig' %}
         {% endfor %}
         </div>
-
+        <a href="{{path('meals_list')}}" class="btn btn-primary btn-sm">Voir plus de menus</a>
     </div>
         
 </section>

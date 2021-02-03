@@ -6,12 +6,18 @@
 
 <div class="container text-center mt-5">
 
-
-
-
 <div class="alert alert-success">Félicitations, votre paiement a été accepté et votre commande est confirmée.</div>
 
+<div class="col-8 mb-3">
+    <h4>Récapitulatif de la commande n° <strong>{{order.id}} du {{order.createdat | date('d/m/y')}} :  </strong></h5>
+    <h5>concernant le menu {{order.meal.title}}</h5>
+    <h5>Montant : {{order.amount}} &euro;</h5>
+ 
+    <h5>Livraison prévue le {{order.date | date('d/m/y')}} à {{order.time}} </h5>
                     
+</div>
+
+            
 <a href="{{path('homepage')}}" class="btn btn-primary btn-sm">Retour à l'accueil</a>
 
 

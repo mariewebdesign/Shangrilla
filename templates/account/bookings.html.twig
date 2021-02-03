@@ -8,22 +8,29 @@
     <h1 class="text-center">Mes réservations</h1>
     <div class="bg-light p-5 my-5">
 
-        <h2 class="h4">Retrouvez ici toutes vos réservations</h2>
+        <h2 class="h4">Retrouvez ici toutes vos réservations de table</h2>
     </div>
 
            {% for booking in app.user.users %}
-                <div class="row border-bottom border-light mt-5">
-            
-                    <div class="col-8 mb-3">
-                       
-                        <p>Réservation n°<strong>{{booking.id}}</strong></p>
-                        <p>Le {{booking.date | date('d/m/y')}} à {{booking.time}} pour {{booking.customers}} participants.</p>
-                      
-                    </div>
+                 <div class="row">
         
+                    <div class="col">
+                        <div class="alert alert-light">
+                            <h3>Réservation du n°{{booking.createdat | date('d/m/Y')}} n° {{booking.id}}</h3>
+                            <dl class="row">
+                                <dt class="col-md-4 ">Date de réservation :</dt>
+                                <dd class="col-md-8 h5">{{booking.date | date('d/m/Y')}}</dd>
+                                <dt class="col-md-4 ">Heure de réservation</dt>
+                                <dd class="col-md-8 h5">{{booking.time }}</dd>
+                                <dt class="col-md-4">Nombre de participants :</dt>
+                                <dd class="col-md-8 h5">{{booking.customers}}</dd>
+                                
+                            </dl>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
-
+ <a href="{{ path('account_home') }}" class="mb-5 mt-5 btn btn-primary">Retour</a>
 </div>
 
 

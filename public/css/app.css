@@ -67,6 +67,10 @@ h3,h4,h5,h6{text-transform:none;}
 .ourblog{font-size:0.6em;text-transform:none}
 .ourblog a{color:#000} 
 
+/* paiement */
+#card-element{border:solid 1px #000;padding:1em}
+
+
 /* footer */
 footer{text-align:left;color:#c1c1c1}
 footer h6{color:#c1c1c1;text-align:left;margin-left:6em}

@@ -57,6 +57,11 @@ class Meal
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="orders")
+     */
+    private $orders;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Meal::class, mappedBy="author", orphanRemoval=true)
@@ -219,6 +224,15 @@ class Meal
         }
 
         return $this;
+    }
+
+      /**
+     * @return Order
+     *
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 
    

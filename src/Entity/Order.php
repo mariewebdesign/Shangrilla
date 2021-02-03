@@ -30,7 +30,7 @@ class Order
     private $customer;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Meal::class)
+     * @ORM\ManyToOne(targetEntity=Meal::class)
      */
     private $meal;
 
@@ -40,7 +40,7 @@ class Order
     private $date;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string")
      */
     private $time;
 
@@ -103,30 +103,18 @@ class Order
         return $this;
     }
 
-    /**
-     * @return Collection|Meal[]
-     */
-    public function getMeal(): Collection
+    public function getMeal(): ?Meal
     {
         return $this->meal;
     }
 
-    public function addMeal(Meal $meal): self
+    public function setMeal(?Meal $meal): self
     {
-        if (!$this->meal->contains($meal)) {
-            $this->meal[] = $meal;
-        }
+        $this->meal = $meal;
 
         return $this;
     }
 
-   
-    public function removeMeal(Meal $meal): self
-    {
-        $this->meal->removeElement($meal);
-
-        return $this;
-    }
 
     public function getDate(): ?\DateTimeInterface
     {
@@ -140,12 +128,12 @@ class Order
         return $this;
     }
 
-    public function getTime(): ?\DateTimeInterface
+    public function getTime(): ?string
     {
         return $this->time;
     }
 
-    public function setTime(\DateTimeInterface $time): self
+    public function setTime(string $time): self
     {
         $this->time = $time;
 

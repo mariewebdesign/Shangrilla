@@ -20,6 +20,9 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\InputBag;
+use Symfony\Component\HttpFoundation\ParameterBag;
+
 
 class OrderController extends AbstractController
 {
@@ -51,19 +54,24 @@ class OrderController extends AbstractController
     {
         $order = new Order();
 
+
         $form = $this->createForm(OrderType::class,$order);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             
+
+
             $user = $this->getUser();
-            $amount = $meal->getPrice();
+            $amountqty= $meal->getPrice() * $form->get('qty')->getData();
+            $amount =floatval($amountqty);
             $payment=0;
+        
             
                                          
             $order->setCustomer($user)
-                  ->addMeal($meal)
+                  ->setMeal($meal)
                   ->setAmount($amount)
                   ->setPayment($payment)
                 ;
@@ -71,7 +79,7 @@ class OrderController extends AbstractController
             $manager->persist($order);
             $manager->flush();
 
-            return $this->redirectToRoute("order_payment",['id'=>$order->getId(),'alert'=>true]);
+            return $this->redirectToRoute("order_payment",['id'=>$order->getId(), 'alert'=>true]);
 
 
         }
@@ -111,10 +119,10 @@ class OrderController extends AbstractController
         ]);
 
     
-
         //var_dump($charge->status);
         if($charge->status == 'succeeded'){
             // paiement validé
+
 
             
                  // on relie l'image à l'annonce et on modifie l'annonce
@@ -125,7 +133,7 @@ class OrderController extends AbstractController
                 $manager->persist($order);
                 $manager->flush();
             
-            return $this->render('order/paymentok.html.twig');
+                return $this->redirectToRoute("order_paymentok",['id'=>$order->getId(), 'alert'=>true]);
         }else{
             return $this->render('order/payment.html.twig');
             $this->addFlash("warning","Le paiement a échoué !");
@@ -140,6 +148,22 @@ class OrderController extends AbstractController
         
        
     }
+
+     /**
+     * Affiche le paiement réussi
+     * @Route("/meal/order/paymentOK/{id}",name="order_paymentok")
+     * 
+     * @param Order $order
+     * @return Response
+     */
+    public function paymentOK(Order $order, Request $request,ObjectManager $manager){
+
+      
+        return $this->render("order/paymentok.html.twig",[
+            'order'=>$order
+            ]);
+    }
+
 
 
 
