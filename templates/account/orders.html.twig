@@ -12,18 +12,32 @@
     </div>
 
            {% for order in app.user.customer %}
+
                 <div class="row border-bottom border-light mt-5">
             
+                    <div class="col-4">
+                        <img src="{{ order.meal.coverImage }}" alt="Photo de l'annonce {{ order.meal.title}}" class="img-fluid">
+
+                        {% set comment = order.meal.commentFromAuthor(app.user)  %}
+                        {% if comment is not null %}
+                            <p class="my-3"><strong>Note : </strong> {% include 'inc/rating.html.twig' with {'rating':comment.rating} %}</p>
+
+                        {% else %}
+                            <p class="my-3">Vous n'avez pas encore donné de note pour ce séjour.
+                            <a href="{{path('order_show',{'id':order.id})}}#comment">Je donne mon avis.</a></p>
+                        {% endif %}
+                    
+                    </div>
                     <div class="col-8 mb-3">
-                       
                         <p>Commande du <span class="h5">{{order.createdat | date('d/m/y')}}</span> : n° <span class="h5">{{order.id}} </span></p>
                         <p>Montant : <span class="h5">{{order.amount}} &euro;</span></p>
                         <p>Menu Choisi : <span class="h5">{{order.meal.title}}</span></p>
                         <p>Livraison prévue le <span class="h5">{{order.date | date('d/m/y')}} à {{order.time}} </span></p>
-                        <a href="{{ path('account_home') }}" class="mb-5 mt-5 btn btn-primary">Retour</a>
+                        <a href="{{path('order_show',{'id':order.id})}}" class="btn btn-info btn-sm">Détails</a>
                     </div>
         
                 </div>
+
             {% endfor %}
 
 </div>

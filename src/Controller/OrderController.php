@@ -8,20 +8,22 @@ use Stripe\Stripe;
 use App\Entity\Meal;
 use Stripe\Customer;
 use App\Entity\Order;
+use App\Entity\Comment;
 use App\Form\OrderType;
+use App\Form\CommentType;
 use App\Repository\MealRepository;
 use App\Repository\OrderRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\InputBag;
-use Symfony\Component\HttpFoundation\ParameterBag;
 
 
 class OrderController extends AbstractController
@@ -37,9 +39,28 @@ class OrderController extends AbstractController
      */
     public function show(Order $order, Request $request,ObjectManager $manager){
 
-      
 
-        return $this->render("order/show.html.twig",['order'=>$order]);
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class,$comment);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $comment->setMeal($order->getMeal())
+                    ->setAuthor($this->getUser())
+                    ;
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            $this->addFlash("success","Votre commentaire a bien été enregistré.");
+        }
+        return $this->render("order/show.html.twig",[
+            'order'=>$order,
+            'form'=>$form->createView()
+            ]);
     }
 
      /**
@@ -53,7 +74,6 @@ class OrderController extends AbstractController
 
     {
         $order = new Order();
-
 
         $form = $this->createForm(OrderType::class,$order);
 
@@ -94,7 +114,7 @@ class OrderController extends AbstractController
     }
 
      /**
-     * Permet d'afficher le formulaire de commande de menu
+     * Permet d'afficher d'afficher le formulaire de paiement
      * @Route("/meal/order/payment/{id}", name="order_payment")
      * @IsGranted("ROLE_USER")
      * 

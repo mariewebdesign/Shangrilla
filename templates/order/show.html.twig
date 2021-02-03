@@ -4,9 +4,12 @@
 
 {% block body %}
 
-    <main class="container">
+    <main class="container ">
     
-        <h1>Réservation n° {{order.id}}</h1>
+        <h1>Commande n° {{order.id}} du {{order.createdat | date('d/m/Y')}}</h1>
+
+        <h2 class="h4 "><em><a class="text-info" href="{{ path('meal_single',{'slug':order.meal.slug})}}">
+                {{order.meal.title}}</a></em></h2> 
     
         {% if app.request.query.get('alert') %}
             <div class="alert alert-success">
@@ -30,11 +33,44 @@
                         <dd class="col-md-8">{{order.time }}</dd>
                         <dt class="col-md-4">Prix total :</dt>
                         <dd class="col-md-8">{{order.amount}}</dd>
+                        <dt class="col-md-4">Commentaire :</dt>
+                        <dd class="col-md-8">{{order.comment | default('Aucun commentaire')}}</dd>
                         
                     </dl>
+                
+                    <div class="alert alert-light" id="comment">
+                           {% if date() > date(order.date) %}
+                                    {% set comment = order.meal.commentFromAuthor(app.user) %}
+                                    {% if comment is not null %}
+                                        <h3 class="alert alert-heading">Votre commentaire :</h3>
+                                        <blockquote>{{comment.content}}</blockquote>
+                                        <strong>Note :{% include 'inc/rating.html.twig' with {'rating' : comment.rating} %}</strong>
+                                    {% else %}
+                                        <h3 class="alert alert-heading">Votre avis nous intéresse !</h3>
+                                        {{form_start(form)}}
+                                        {{form_widget(form)}}
+                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        {{form_end(form)}}
+                                    {% endif %}
+                            {% else %}
+                                <h3 class="alert alert-heading">Votre avis nous intéresse !</h3>
+                                <p class="alert alert-warning">Vous ne pourrez pas noter ce menu tant que vous n'avez pas été livré.
+                                <br>Revenez une fois que vous l'aurez mangé.</p>
+                            {% endif %}
+           
+                    
+                    </div>
                 </div>
             </div>
-            
+            <div class="col">
+                <div class="alert alert-light">
+                    <h3 class="alert-heading">Votre menu</h3>
+                    <h4> <a href="{{ path('meal_single',{'slug':order.meal.slug}) }}" class="btn btn-outline-primary">{{order.meal.title}}</a></h4>
+                    <img src="{{ order.meal.coverImage }}" alt="Image de couverture de {{ order.meal.title}}" class="img-fluid">
+                    {{order.meal.description |raw}}
+                    <a href="{{ path('meal_single',{'slug':order.meal.slug}) }}" class="btn btn-outline-primary">Détails</a>
+                </div>
+            </div>
 
         </div>
 
