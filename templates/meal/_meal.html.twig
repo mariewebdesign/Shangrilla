@@ -27,6 +27,14 @@
                         </div>
             
                     </div>
+
+                    <div class="col mt-2 card-footer text-muted">
+                            {% if meal.comments | length >0 %}
+                                <span class="h6">{% include 'inc/rating.html.twig' with {'rating':meal.averageRatings } %} sur {{meal.comments|length}} avis.</span>
+                            {% else %}
+                                <span>Pas encore noté.</span>
+                            {% endif %}
+                        </div>
                            
                 </div>
             </div>              

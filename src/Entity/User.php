@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use App\Entity\Order;
+use App\Entity\Comment;
 use Cocur\Slugify\Slugify;
 use App\Entity\BookingTable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\Collection;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -118,9 +119,16 @@ class User implements UserInterface  // implémentation de UserInterface permett
     private $tel;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author",orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Meal::class, mappedBy="author")
+     */
+    private $meals;
+
+ 
 
     public function getFullName(){
         return "{$this->firstname} {$this->lastname}";
@@ -133,6 +141,7 @@ class User implements UserInterface  // implémentation de UserInterface permett
         $this->roles = new ArrayCollection();
         $this->date = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->meals = new ArrayCollection();
     
     }
 
@@ -435,4 +444,36 @@ class User implements UserInterface  // implémentation de UserInterface permett
 
         return $this;
     }
+
+    /**
+     * @return Collection|Meal[]
+     */
+    public function getMeals(): Collection
+    {
+        return $this->meals;
+    }
+
+    public function addMeal(Meal $meal): self
+    {
+        if (!$this->meals->contains($meal)) {
+            $this->meals[] = $meal;
+            $meal->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeal(Meal $meal): self
+    {
+        if ($this->meals->removeElement($meal)) {
+            // set the owning side to null (unless already changed)
+            if ($meal->getAuthor() === $this) {
+                $meal->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
 }

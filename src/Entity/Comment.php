@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,17 +31,16 @@ class Comment
      */
     private $content;
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="comments")
-     */
-    private $comments;
-
-
     /**
      * @ORM\Column(type="datetime")
      */
     private $createdat;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     */
+    private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity=Meal::class, inversedBy="comments")
@@ -94,19 +94,6 @@ class Comment
 
 
 
-    public function getComments(): ?Order
-    {
-        return $this->comments;
-    }
-
-    public function setComments(?Order $comments): self
-    {
-        $this->comments = $comments;
-
-        return $this;
-    }
-
-
     public function getCreatedat(): ?\DateTimeInterface
     {
         return $this->createdat;
@@ -115,6 +102,19 @@ class Comment
     public function setCreatedat(\DateTimeInterface $createdat): self
     {
         $this->createdat = $createdat;
+
+        return $this;
+    }
+
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

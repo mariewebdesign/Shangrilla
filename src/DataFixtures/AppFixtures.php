@@ -79,6 +79,7 @@ class AppFixtures extends Fixture
                  ->setCp($faker->postcode)
                  ->setCity($faker->city)
                  ->setTel($faker->e164PhoneNumber)
+                
                 ;
             $manager->persist($user);
             $users[]=$user;
@@ -107,7 +108,7 @@ class AppFixtures extends Fixture
                     ->setIntroduction($introduction)
                     ->setDescription($description)
                     ->setPrice(mt_rand(5,60))
-                   
+                    ->setAuthor($user)
    
                     ;
                 // on sauvegarde
@@ -121,7 +122,7 @@ class AppFixtures extends Fixture
                     $order = new Order();
                     $createdat = $faker->dateTimeBetween('-6 months');
                     $date = $faker->dateTimeBetween('-3 months');
-                    $time = $faker->dateTimeBetween('-3 hours');
+                    $time = $faker->randomElement($array = array ('19h00','19h15','19h30','19h45','20h00','20h15','20h30','20h45','21h00','21h15','21h30'));
                     $meal = $meals[mt_rand(0,count($meals)-1)];
                     $qty = mt_rand(1,12);
                     $amount = $meal->getPrice() * $qty;
@@ -130,18 +131,18 @@ class AppFixtures extends Fixture
     
                     // trouver le client
                     $user = $users[mt_rand(0,count($users)-1)];
-        
+                    $comment = $faker->paragraph();
                       
                     // configuration de la commande
                     $order->setCustomer($user)
-                          ->addMeal($meal)
+                          ->setMeal($meal)
                           ->setDate($date)
                           ->setTime($time)
                           ->setCreatedat($createdat)
                           ->setAmount($amount)
                           ->setQty($qty)
                           ->setPayment($payment)
-        
+                          ->setComment($comment)
                             ;
     
                     $manager->persist($order);  
@@ -153,7 +154,7 @@ class AppFixtures extends Fixture
         
                         $comment->setContent($faker->paragraph())
                                 ->setRating(mt_rand(1,5))
-                            
+                                ->setAuthor($user)
                                 ->setMeal($meal)
                                 ;
                         

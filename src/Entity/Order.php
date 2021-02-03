@@ -66,6 +66,11 @@ class Order
     private $qty;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $comment;
+
+    /**
      * Callback appelé à chaque fois qu'on crée une commande
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -185,6 +190,18 @@ class Order
     public function setQty(int $qty): self
     {
         $this->qty = $qty;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(string $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }
