@@ -1,0 +1,42 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edition des commandes{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+
+<main class="container">
+    <h1 class="text-center mt-5 mb-5">Modification de la commande n°{{order.id}}</h1>
+
+    <div class="row">
+
+       {{form_start(form)}}
+        <div class="row">
+            <div class="col-md-3 offset-md-2">
+                {{form_row(form.date)}}
+          
+             
+            </div>
+            <div class="col-md-3">
+                {{form_row(form.customer)}}
+               
+            </div>
+            <div class="col-md-3">
+                  {{form_row(form.meal)}}
+               
+            </div>
+        
+        </div>
+        <div class="text-center mt-3 col-md-6 offset-md-3">
+           {{form_row(form.comment)}}
+            <button type="submit" class="mt-5 btn btn-info"><i class="fas fa-check"></i> Enregistrer</button>
+        </div>
+        {{form_end(form)}}
+       </div>
+</main>
+            
+{% endblock %}
+
+
+

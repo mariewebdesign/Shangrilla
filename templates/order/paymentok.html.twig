@@ -5,11 +5,11 @@
 {% block body %}
 
 <div class="row container text-center mt-5">
-<div class="col-md-6 offset-md-6 mb-3 ">
+<div class="col-md-8 offset-md-4 mb-3 ">
 
 <div class="alert alert-success">Félicitations, votre paiement a été accepté et votre commande est confirmée.</div>
 
-    <div class="text-left">
+    <div class="text-left mt-3 mb-3">
 
         <h4>Récapitulatif de la commande n° <strong>{{order.id}} du {{order.createdat | date('d/m/y')}} :  </strong></h5>
         <h5>concernant le menu {{order.meal.title}}</h5>

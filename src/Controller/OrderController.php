@@ -11,10 +11,12 @@ use App\Entity\Order;
 use App\Entity\Comment;
 use App\Form\OrderType;
 use App\Form\CommentType;
+use Symfony\Component\Mime\Email;
 use App\Repository\MealRepository;
 use App\Repository\OrderRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +24,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -120,7 +123,7 @@ class OrderController extends AbstractController
      * 
      * @return Response
      */
-    public function payment(Order $order, OrderRepository $repoOrder,Request $request,ObjectManager $manager)
+    public function payment(MailerInterface $mailer,Order $order, OrderRepository $repoOrder,Request $request,ObjectManager $manager)
 
     {
 
@@ -138,30 +141,93 @@ class OrderController extends AbstractController
             'customer' => $customer->id
         ]);
 
-    
-        //var_dump($charge->status);
         if($charge->status == 'succeeded'){
             // paiement validé
 
+      /*       // envoi du mail
+                $html = "</style>
+                <!-- move the above styles into your custom stylesheet -->
+                <spacer size='16'></spacer>
+                <container>
+                <spacer size='16'></spacer>
+                <row>
+                    <columns>
+                    <h1>Merci pour votre commande</h1>
+                    <p></p>
+                    <spacer size='16'></spacer>
+                    <callout class='secondary'>
+                        <row>
+                        <columns large='6'>
+                            <p>
+                            <strong>Type de paiement</strong><br/>
+                            Carte Bancaire
+                            </p>
+                            <p>
+                            <strong>Adresse mail</strong><br/>";
+             
+                $html.="  </p><p><strong>Numero de commande</strong><br/>";
+               
+                $html.=" </p>
+                    </columns>
+                    <columns large='6'>
+                    <p>
+                        <strong>Type de livraison</strong><br/>
+                        Colissimo (2 jours)<br/><br>
+                        <strong>Adresse de livraison</strong><br/>
+                        Captain Price<br/>
+                        123 Maple Rd<br/>
+                        Campbell, CA 95112
+                    </p>
+                    </columns>
+                </row>
+                </callout>
+                </columns></row></container>";
 
-            
-                 // on relie l'image à l'annonce et on modifie l'annonce
-                $payment = 1;
-                $order->setPayment($payment);
+                try{
+                
+                $email = (new Email())
+                ->from('contact@shangrila.fr')
+                ->to('m.limeul@gmail.com')
+                ->subject('Confirmation de votre commande')
+                ->html($html);
+       
+                $email->SMTPOptions = array(
+                    'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                    )
+                    );
 
-                // on sauvegarde les images
-                $manager->persist($order);
-                $manager->flush();
+               
+
+                $mailer->send($email);
+
+
+                } catch (Exception $e) {
+                                
+                    $this->addFlash("Message could not be sent. Mailer Error: {$email->ErrorInfo}");
+                }
+                 */
             
-                return $this->redirectToRoute("order_paymentok",['id'=>$order->getId(), 'alert'=>true]);
+            // on relie l'image à l'annonce et on modifie l'annonce
+            $payment = 1;
+            $order->setPayment($payment);
+
+            // on sauvegarde les images
+            $manager->persist($order);
+            $manager->flush();
+            
+            return $this->redirectToRoute("order_paymentok",['id'=>$order->getId(), 'alert'=>true]);
+
         }else{
+
             return $this->render('order/payment.html.twig');
             $this->addFlash("warning","Le paiement a échoué !");
         }
         }
     return $this->render('order/payment.html.twig',[
 
-      
         'order'=>$order
         
     ]);

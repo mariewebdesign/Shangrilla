@@ -2,13 +2,10 @@
 
 namespace App\Entity;
 
-use App\Entity\Order;
-use App\Entity\Comment;
+
 use Cocur\Slugify\Slugify;
-use App\Entity\BookingTable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;

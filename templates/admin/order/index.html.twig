@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des commandes{% endblock %}
+
+{% block body %}
+
+<main class="container-fluid my-5">
+    <h1 class="my-5">Gestion des commandes</h1>
+    
+    <table class="table table-over">
+        <thead class="table-primary">
+            <th>Id</th>
+            <th>Date</th>
+            <th>Visiteur</th>
+            <th>Menu</th>
+            <th>Date de livraison</th>
+            <th>Heure de livraison</th>
+            <th>Nombre de menus</th>
+            <th>Prix total</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+           
+            {% for order in pagination.data %}
+            <tr>
+                <td>{{order.id}}</td>
+                <td>{{order.createdat|date('d/m/Y H:i')}}</td>
+                <td>{{order.customer.fullName}}</td>
+                <td>{{order.meal.title}}</td>
+                <td>{{order.date|date('d/m/Y H:i')}}</td>
+                <td>{{order.time}}</td>
+                <td>{{order.qty}}</td>
+                <td>{{order.amount}}</td>
+                <td>
+                    <a href="{{path('admin_orders_edit',{'id':order.id})}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                </td>
+                <td>
+                    <a href="{{path('admin_orders_delete',{'id':order.id})}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ pagination.display() }}
+
+</main>
+
+{% endblock %}

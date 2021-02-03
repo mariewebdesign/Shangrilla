@@ -1,0 +1,80 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edition des menus{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+
+<main class="container-fluid my-5">
+    <h1 class="text-center">Modification du menu <br>
+    <small>{{meal.title}}</small></h1>
+
+    <section class="col-md-8 offset-md-2">
+
+        {{form_start(form)}}
+        <div class="row">
+            <div class="col">
+                <div class="card-bg-light">
+                    <div class="card-header">
+                        <h4 class="card-title">Corriger le menu ?</h4>
+                    </div>
+                    <div class="card-body">
+                         {{form_widget(form)}}
+                    </div>
+                </div>
+
+            </div>
+            
+                <div class="card bg-light">
+                    <div class="card-header">
+                        <h4 class="card-title">Commentaires</h4>
+                    </div>
+                    <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Client</th>
+                                         <th>Note</th>  
+                                        <th>Commentaire</th> 
+                                        <th></th>      
+                                    </tr>
+                                
+                                </thead>
+                                <tbody>
+                                {% for comment in meal.comments %}
+                                    <tr>
+                                        <td>{{comment.id}}</td>
+                                        <td>{{comment.author.fullName}}</td>
+                                        <td><span class="badge badge-primary rounded">{{comment.rating | number_format(1,',',' ')}}</span></td>
+                                        <td>{{comment.content}}</td>
+                                        <td>
+                                            <a href="{{path('admin_comments_edit',{'id':comment.id})}}" class="btn btn-info btn-sm"><i class="fas fa-pen"></i> </a>
+                                        </td>
+                                    
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-info"><i class="fas fa-check"></i> Enregistrer</button>
+        </div>
+        {{form_end(form)}}
+    </section>
+
+</main>
+
+{% endblock %}
+
+
+
+
+
+

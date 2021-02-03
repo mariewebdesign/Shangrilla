@@ -1,0 +1,54 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des menus{% endblock %}
+
+{% block body %}
+<div class="container-fluid my-5">
+
+    <h1 class="my-5">Gestion des menus</h1>
+
+    <table class="table table-hover">
+    
+        <thead class="table-primary">
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th class="text-center">Note</th>
+            <th></th>
+            <th></th>
+   
+        </thead>
+
+        <tbody>
+            {% for meal in pagination.data %}
+            <tr>
+                <td>{{meal.id}}</td>
+                <td>{{meal.title}}</td>
+                <td>
+                    <img src="{{meal.author.avatar}}" alt="Avatar de {{meal.author.fullName}}" class="avatar avatar-xs">
+                    {{meal.author.fullName}}
+                </td>
+                <th>{{meal.description}}</th>
+                <th>{{meal.price}}</th>
+   
+                <td class="text-center"><span class="badge badge-primary rounded">{{ meal.averageRatings | number_format(1,',',' ') }}</span></td>
+                <td>
+                    <a href="{{path('admin_meals_edit',{'id':meal.id})}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                </td>
+                <td>
+                    <a href="{{path('admin_meals_delete',{'id':meal.id})}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        
+        </tbody>
+
+    </table>
+
+</div>
+
+       {{ pagination.display() }}
+
+{% endblock %}
